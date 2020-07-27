@@ -33,7 +33,6 @@ def get_args():
 
     args = parser.parse_args()
 
-    print(args)
     return args.LSID, args.email, args.pollfreq, args.console, args.no_email
 
 def send_email(msg):
