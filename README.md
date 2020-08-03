@@ -30,3 +30,8 @@ It depends on core python3 packages as well as the external `requests` library.
 This was developed to run from a \*nix-like terminal, 
 but should work on any terminal when run as a python script 
 (via `python lasership_tracker.py ...`).
+
+## Caveats:
+Sending emails directly from random computers may well look spammy and fail.
+Successful delivery in your environment is not necessarily guaranteed. 
+This will not work as-is for cloud environments due to anti-spam protections.

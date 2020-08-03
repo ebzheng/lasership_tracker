@@ -34,6 +34,7 @@ def get_args():
     args = parser.parse_args()
 
     # print(args)
+    
     return args.LSID, args.email, args.pollfreq, args.console, args.no_email
 
 def send_email(msg):
@@ -146,4 +147,3 @@ def lasership_tracker(LSID, email, pollfreq=60, console=False, no_email=False):
 
 if __name__ == '__main__':
     lasership_tracker(*get_args())
-
