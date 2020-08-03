@@ -33,7 +33,7 @@ def get_args():
 
     args = parser.parse_args()
 
-    print(args)
+    # print(args)
     return args.LSID, args.email, args.pollfreq, args.console, args.no_email
 
 def send_email(msg):
@@ -120,7 +120,9 @@ def lasership_tracker(LSID, email, pollfreq=60, console=False, no_email=False):
     delivered = False
     prev_time = datetime.datetime.fromordinal(2) 
         # previous event time; initialized sometime in the distant past
-      
+    
+    print('Now monitoring...')
+  
     while not delivered:
         event = poll_LS_status(LSID)
         
@@ -144,3 +146,4 @@ def lasership_tracker(LSID, email, pollfreq=60, console=False, no_email=False):
 
 if __name__ == '__main__':
     lasership_tracker(*get_args())
+
