@@ -87,6 +87,7 @@ def poll_LS_status(LSID):
         data = {}
     
     data['DetectedTime'] = datetime.datetime.now()
+    data['LSID'] = LSID
     data = defaultdict(str, data)
         # in case of missing fields, we get empty strings instead of KeyErrors
     return data
@@ -102,6 +103,9 @@ def parse_LS_event(event):
     
     content += f'The package became "{status}" at {time} in {location}. \n\n'
     
+    LSID = event['LSID']
+    content += f'LSID: {LSID}\n\n'
+
     if status == 'Delivered':
         location = event["Location"]
         content += f'The package was delivered to "{location}".\n\n'
