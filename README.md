@@ -4,7 +4,7 @@ Send email notifications to yourself for Lasership packages.
 ## Usage:
 ```
 usage: lasership_tracker.py [-h] [--pollfreq POLLFREQ] [--console]
-                            [--no-email]
+                            [--no-email] [--boxname BOXNAME]
                             LSID email
 
 Monitor a Lasership package via the JSON API.
@@ -18,6 +18,7 @@ optional arguments:
   --pollfreq POLLFREQ  polling interval (in seconds); default: 60
   --console            log records to console
   --no-email           disable emailing
+  --boxname BOXNAME    Nickname for box; defaults to nothing
 ```
 
 ## Example:
