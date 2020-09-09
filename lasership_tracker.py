@@ -30,12 +30,14 @@ def get_args():
                         action="store_true")
     parser.add_argument("--no-email", help="disable emailing",
                         action="store_true")
-
+    parser.add_argument("--boxname", help="Nickname for box; defaults to LSID", type=str, default=None)
     args = parser.parse_args()
-
+    
+    if args.boxname is None: args.boxname = args.LSID
+    
     # print(args)
     
-    return args.LSID, args.email, args.pollfreq, args.console, args.no_email
+    return args.LSID, args.email, args.boxname, args.pollfreq, args.console, args.no_email
 
 def send_email(msg):
     '''sends the EmailMessage via smtplib'''
@@ -49,12 +51,12 @@ def send_email(msg):
         return False
     return True
 
-def make_email(event, address):
+def make_email(event, address, boxname):
     # TODO: make configurable parameters!
     '''given JSON dict, returns EmailMessage of msg'''
     msg = EmailMessage()
 
-    msg['Subject'] = f"LS: {event['EventLabel']}" # latest 'thing' (e.g. 'Out for Delivery')
+    msg['Subject'] = f"LS {boxname}: {event['EventLabel']}" # latest 'thing' (e.g. 'Out for Delivery')
     msg['From'] = address
     msg['To'] = address
     
@@ -120,7 +122,7 @@ def parse_LS_event(event):
     
     return content
 
-def lasership_tracker(LSID, email, pollfreq=60, console=False, no_email=False):
+def lasership_tracker(LSID, email, boxname, pollfreq=60, console=False, no_email=False):
     
     delivered = False
     prev_time = datetime.datetime.fromordinal(2) 
@@ -136,7 +138,7 @@ def lasership_tracker(LSID, email, pollfreq=60, console=False, no_email=False):
         if last_time > prev_time:
             # if there is a new update
 
-            msg = make_email(event, email)
+            msg = make_email(event, email, boxname)
             if not no_email: send_email(msg)
             prev_time = last_time
             
