@@ -140,11 +140,11 @@ def lasership_tracker(LSID, email, pollfreq=60, console=False, no_email=False):
             if not no_email: send_email(msg)
             prev_time = last_time
             
-        if console:
-            print(parse_LS_event(event))
+            if console:
+                print(parse_LS_event(event))
         
-        if event['EventLabel'] == 'Delivered':
-            delivered = True
+            if event['EventLabel'] == 'Delivered':
+                delivered = True
         
         time.sleep(pollfreq)
     return 0
