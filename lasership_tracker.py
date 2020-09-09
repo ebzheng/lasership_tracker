@@ -30,10 +30,11 @@ def get_args():
                         action="store_true")
     parser.add_argument("--no-email", help="disable emailing",
                         action="store_true")
-    parser.add_argument("--boxname", help="Nickname for box; defaults to LSID", type=str, default=None)
+    parser.add_argument("--boxname", help="Nickname for box; defaults to nothing", type=str,
+                        default='')
     args = parser.parse_args()
     
-    if args.boxname is None: args.boxname = args.LSID
+    #if args.boxname is None: args.boxname = args.LSID
     
     # print(args)
     
