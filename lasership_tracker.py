@@ -90,9 +90,8 @@ def poll_LS_status(LSID):
         if data.status_code != 200:
             print('Warning! Abnormal API response:', data.status_code)
             #raise ValueError
-        if data.json()['Error']:
-            print('Warning! LS API Error!')
-            raise ValueError
+        if 'Error' in data.json():
+            if data.json()['Error']: print('Warning! LS API Error!')
         else:
             data = data.json()['Events'][0]
     except:
