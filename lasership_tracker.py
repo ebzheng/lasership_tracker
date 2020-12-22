@@ -85,7 +85,16 @@ def poll_LS_status(LSID):
     '''polls LS status; returns latest event, or empty dict if failed'''
     try:
         data = requests.get(f'https://www.lasership.com/track/{LSID}/json')
-        data = data.json()['Events'][0]
+        print(data)
+        print(data.json())
+        if data.status_code != 200:
+            print('Warning! Abnormal API response:', data.status_code)
+            #raise ValueError
+        if data.json()['Error']:
+            print('Warning! LS API Error!')
+            raise ValueError
+        else:
+            data = data.json()['Events'][0]
     except:
         data = {}
     
